@@ -1,0 +1,66 @@
+h2 {
+    padding-bottom: 1rem;
+}
+ul.goods {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    .goods-item {
+        position: relative;
+        width: 30%;
+        box-sizing: border-box;
+        margin: 2rem 0 0 2%;
+        background-color: #495057;
+        border-radius: 15px;
+    }
+}
+a.good-router {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    .good-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 5px 10px 5px;
+        & > * {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            & > * {
+                margin: 10px 5px 0 5px;
+            }
+        }
+    }
+}
+
+.good-onsale {
+    background-color: goldenrod;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.good-popular {
+    text-shadow: 0 0 5px yellow;
+    animation: glow 2s infinite alternate;
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 5px yellow;
+        }
+        100% {
+            text-shadow: 0 0 10px #ef476f;
+        }
+    }
+}
+
+.good-price {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    & > * {
+        margin-right: 10px;
+    }
+}

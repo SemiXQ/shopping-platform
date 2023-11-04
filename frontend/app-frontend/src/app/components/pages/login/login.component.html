@@ -1,0 +1,24 @@
+<p>login works!</p>
+<div class="login-container">
+    <form id="userlogin-form" [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
+        <label for="email">Email: </label>
+        <input id="email" type="text" placeholder="mail@example.com" formControlName="email">
+        <div class="inputerr-container" 
+             *ngIf="emailControl?.invalid && (emailControl?.dirty || emailControl?.touched)">
+            <div *ngIf="emailControl?.errors?.['required']">Email is required.</div>
+            <div *ngIf="emailControl?.errors?.['pattern']">Please fix the email format.</div>
+        </div>
+        <label for="password">Password: </label>
+        <input id="password" type="password" formControlName="password">
+        <div class="inputerr-container" 
+             *ngIf="pwdControl?.invalid && (pwdControl?.dirty || pwdControl?.touched)">
+            <div *ngIf="pwdControl?.errors?.['required']">Password is required.</div>
+            <div *ngIf="pwdControl?.errors?.['minlength']">Password should have no less than 8 characters.</div>
+            <div *ngIf="pwdControl?.errors?.['maxlength']">Password should have no more than 16 characters.</div>
+            <div *ngIf="pwdControl?.errors?.['pattern']">Password should have 8-16 characters, 
+                including at least one digit, one uppercase letter and one special character. 
+                Special characters that could be used in password: %,$,#,@ </div>
+        </div>
+    </form>
+    <button type="submit" form="userlogin-form" [disabled]="!userLoginForm.valid">Submit</button>
+</div>

@@ -1,0 +1,22 @@
+<h2>Welcome to Shop-H! Explore here to get your trending clothing!</h2>
+<ul class="goods">
+    <li class="goods-item" *ngFor="let good of goods">
+        <a class="good-router" routerLink="good/{{good.id}}">
+            <img [src]="good.imageUrl" [alt]="good.name">
+            <div class="good-content">
+                <div class="good-basic-info">
+                    <div>{{good.name}}</div>
+                    <div class="good-price">
+                        <p [ngStyle]="{'color': good.on_sale? 'red':'whitesmoke'}">$ {{good.current_price}}</p>
+                        <del *ngIf="good.on_sale"> {{good.pre_price}}</del>
+                    </div>
+                </div>
+                <div class="good-tags">
+                    <div class="good-popular" *ngIf="isPopular(good); else common">Fasion Star</div>
+                    <ng-template #common>High Quality</ng-template>
+                    <div class="good-onsale" *ngIf="good.on_sale">Sale</div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
