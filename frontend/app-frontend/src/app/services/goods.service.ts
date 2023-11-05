@@ -16,6 +16,11 @@ export class GoodsService {
     return sample_goods;
   }
 
+  // TODO: change to REST APIs
+  getGoodById(id: string) {
+    return sample_goods.find(good => good.id === id);
+  }
+
   discount(good: Good): number | undefined {
         if (good.on_sale) {
             const factor = 10 ** 2;

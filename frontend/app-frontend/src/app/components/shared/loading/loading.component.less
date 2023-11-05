@@ -1,0 +1,23 @@
+.loading {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 35%;
+    background: transparent;
+    border: 1rem solid;
+    border-radius: 50%;
+    border-top: 1rem solid goldenrod;
+    animation: loadingSpinner 4s linear infinite;
+    @keyframes loadingSpinner {
+        0% {transform: rotate(0deg);}
+        100% {transform: rotate(360deg);}
+    }
+    & > * {
+        text-align: center;
+        text-transform: uppercase;
+    }
+}

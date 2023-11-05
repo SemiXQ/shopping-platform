@@ -1,1 +1,27 @@
-<p>good-item works!</p>
+<div *ngIf="good !== undefined; else loading">
+    <div class="good-container">
+        <img [src]="good.imageUrl" [alt]="good.name">
+        <div class="good-info">
+            <h1>
+                <a>{{good.type}}</a>  >  {{good.name}}
+            </h1>
+            <div>
+                <img [src]="'assets/heart-svgrepo.svg'" [alt]="'heart-icon'">
+                <p>{{good.favors}}</p>
+            </div>
+            <div>
+                <p [ngStyle]="{'color': good.on_sale? 'goldenrod':'whitesmoke'}"> {{good.current_price | currency}}</p>
+                <del *ngIf="good.on_sale" style="color:orangered">{{good.pre_price | currency}}</del>
+            </div>
+            <div class="shopping">
+                <label for="good-quantity" >Quantity: </label>
+                <input id="good-quantity" [formControl]="quantityControl" type="number" min="1" max="5" >
+                <button (click)="onSubmit()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

@@ -7,8 +7,8 @@
                 <div class="good-basic-info">
                     <div>{{good.name}}</div>
                     <div class="good-price">
-                        <p [ngStyle]="{'color': good.on_sale? 'red':'whitesmoke'}">$ {{good.current_price}}</p>
-                        <del *ngIf="good.on_sale"> {{good.pre_price}}</del>
+                        <p [ngStyle]="{'color': good.on_sale? 'red':'whitesmoke'}">{{good.current_price | currency}}</p>
+                        <del *ngIf="good.on_sale"> {{good.pre_price | currency}}</del>
                     </div>
                 </div>
                 <div class="good-tags">
