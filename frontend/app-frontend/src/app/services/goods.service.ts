@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Good } from '../data/models/good';
 // Remove after change to REST APIs
 import { sample_goods } from 'src/test_data/goods-data'; 
+import { Observable, catchError, of, map } from 'rxjs';
+import { GoodItem, GoodList } from '../data/interfaces/goodInterfaces';
+import { GOOD_URLS } from '../routes/route';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +14,41 @@ export class GoodsService {
 
   constructor(private http: HttpClient) { }
 
-  // TODO: change to REST APIs
-  getAll(): Good[] {
-    return sample_goods;
+  private _emptyGoodsBuilder() {
+    const goods: Good[] = [];
+    return goods;
   }
 
-  // TODO: change to REST APIs
-  getGoodById(id: string) {
-    return sample_goods.find(good => good.id === id);
+  // REST API: get all goods
+  getAll(): Observable<Good[]> {
+    return this.http.get<GoodList>(GOOD_URLS.getAll).pipe(
+      map((res: GoodList) => {
+        if(res.error !== undefined) {
+          console.log("Error in fetching goods: ", res.error);
+        }
+        return res.goods ?? this._emptyGoodsBuilder();
+      }),
+      catchError((error: any) => {
+        console.log("Error in fetching goods: ", error);
+        return of(this._emptyGoodsBuilder());
+      })
+    );
+  }
+
+  // REST API: get good by id
+  getGoodById(id: string): Observable<Good | undefined> {
+    return this.http.get<GoodItem>(GOOD_URLS.getItemById(id)).pipe(
+      map((res: GoodItem) => {
+        if (res.error !== undefined) {
+          console.log("Error in fetching good item: ", res.error);
+        }
+        return res.good;
+      }),
+      catchError((error: any) => {
+        console.log("Error in fetching good item: ", error);
+        return of(undefined);
+      })
+    );
   }
 
   discount(good: Good): number | undefined {

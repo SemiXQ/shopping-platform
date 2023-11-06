@@ -19,7 +19,9 @@ export class GoodItemComponent {
       Validators.min(1)
     ]);
     route.params.subscribe(params => {
-      this.good = goodService.getGoodById(params['id']);
+      goodService.getGoodById(params['id']).subscribe((good: Good | undefined) => {
+        this.good = good;
+      })
     })
   }
 

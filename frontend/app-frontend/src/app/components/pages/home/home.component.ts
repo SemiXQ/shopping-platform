@@ -11,7 +11,8 @@ export class HomeComponent {
   goods: Good[] = [];
   isPopular: (good: Good) => boolean;
   constructor(private goodService: GoodsService) {
-    this.goods = goodService.getAll();
+    goodService.getAll().subscribe(goods => this.goods = goods);
+    //this.goods = goodService.getAll();
     this.isPopular = goodService.isPopular;
   }
 }
