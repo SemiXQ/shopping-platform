@@ -1,0 +1,9 @@
+<div class="tooltip-container">
+    <clr-tooltip clrTooltipTrigger>
+        <!-- <cds-icon shape="info-circle" size="md" clrTooltipTrigger></cds-icon> -->
+        {{storeData.name}}
+        <clr-tooltip-content *clrIfOpen [ngStyle]="{'background': '#343a40'}">
+            {{storeData.address}}
+        </clr-tooltip-content>
+    </clr-tooltip>
+</div>

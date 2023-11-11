@@ -8,3 +8,10 @@ export const GOOD_URLS = {
     getAll: getAllGoodsUrl,
     getItemById: getGoodItemById,
 }
+
+const storesURL: string = API_URL + "/stores";
+const getAllStoresUrl: string = storesURL;
+
+export const STORE_URLS = {
+    getAll: storesURL,
+}

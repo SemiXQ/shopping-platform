@@ -8,7 +8,7 @@ import os
 goods_bp = Blueprint('goods_bp', __name__)
 
 # TODO: change to request data from database
-@cache.cached(timeout=30, key_prefix='all_goods')
+@cache.cached(timeout=60, key_prefix='all_goods')
 def cachedGetAll() -> (dict[str, Good], List[dict]):
     goods: dict[str, Good] = {}
     goods_dict: List[dict] = []
