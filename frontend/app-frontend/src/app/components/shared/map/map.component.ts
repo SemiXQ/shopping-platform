@@ -40,6 +40,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   constructor(storeService: StoresService) {
     storeService.getAllStores().subscribe((storesData: Store[]) => {
       this.stores = storesData;
+      this._registerMarkerLayer();
     });
   }
 
@@ -59,28 +60,6 @@ export class MapComponent implements OnInit, AfterViewInit {
         minZoom: 8
       }),
     });
-
-    const featureArr: Array<Feature> = new Array<Feature>();
-
-    this.stores.forEach((store: Store, idx: number) => {
-      const markerFeature: Feature = new Feature({
-        geometry: new Point(fromLonLat(store.lonLatLoc)),
-        style: MapComponent._logoStyle,
-        name: 'Store_' + idx,
-        store_id: store.id
-      });
-      markerFeature.setStyle(MapComponent._logoStyle);
-      featureArr.push(markerFeature);
-    });
-
-    const markerLayer = new VectorLayer({
-      className: 'store-markers',
-      source: new VectorSource({
-        features: featureArr
-      })
-    });
-
-    this.map.addLayer(markerLayer);
   }
 
   ngAfterViewInit(): void {
@@ -104,6 +83,30 @@ export class MapComponent implements OnInit, AfterViewInit {
       //   const hasFeature = this.map.hasFeatureAtPixel(this.map.getEventPixel(evt.originalEvent));
       //   //TODO: change cursor style dynamically
       // });
+  }
+
+  private _registerMarkerLayer() {
+    const featureArr: Array<Feature> = new Array<Feature>();
+
+    this.stores.forEach((store: Store, idx: number) => {
+      const markerFeature: Feature = new Feature({
+        geometry: new Point(fromLonLat(store.lonLatLoc)),
+        style: MapComponent._logoStyle,
+        name: 'Store_' + idx,
+        store_id: store.id
+      });
+      markerFeature.setStyle(MapComponent._logoStyle);
+      featureArr.push(markerFeature);
+    });
+
+    const markerLayer = new VectorLayer({
+      className: 'store-markers',
+      source: new VectorSource({
+        features: featureArr
+      })
+    });
+
+    this.map.addLayer(markerLayer);
   }
 
   private _closeTooltip() {
