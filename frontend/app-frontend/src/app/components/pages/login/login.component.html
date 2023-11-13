@@ -1,6 +1,5 @@
-<p>login works!</p>
-<div class="login-container">
-    <form id="userlogin-form" [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
+<div class="login-container" *ngIf="!isSubmit; else loading">
+    <form id="userlogin-form" [formGroup]="userLoginForm" (ngSubmit)="submit()">
         <label for="email">Email: </label>
         <input id="email" type="text" placeholder="mail@example.com" formControlName="email">
         <div class="inputerr-container" 
@@ -17,8 +16,12 @@
             <div *ngIf="pwdControl?.errors?.['maxlength']">Password should have no more than 16 characters.</div>
             <div *ngIf="pwdControl?.errors?.['pattern']">Password should have 8-16 characters, 
                 including at least one digit, one uppercase letter and one special character. 
-                Special characters that could be used in password: %,$,#,@ </div>
+                Special characters that could be used in password: %,$,#,&#64; </div>
         </div>
     </form>
     <button type="submit" form="userlogin-form" [disabled]="!userLoginForm.valid">Submit</button>
 </div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

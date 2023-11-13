@@ -5,8 +5,8 @@ class Good:
         self.id: str = good_json.get('id', None)
         if not self.id:
             raise Exception("Missing id in good")
-        self.name: str = good_json.get('name', None)
-        self.type: str = good_json.get('type', None)
+        self.name: str = good_json.get('name', "")
+        self.type: str = good_json.get('type', "")
         self.current_price: float = good_json.get('current_price', None)
         self.pre_price: float = good_json.get('pre_price', 0)
         self.favors: int = good_json.get('favors', 0)

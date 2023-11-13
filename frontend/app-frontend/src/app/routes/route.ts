@@ -13,5 +13,12 @@ const storesURL: string = API_URL + "/stores";
 const getAllStoresUrl: string = storesURL;
 
 export const STORE_URLS = {
-    getAll: storesURL,
+    getAll: getAllStoresUrl,
+}
+
+const userURL: string = API_URL + "/user";
+const userLoginURL: string = userURL + "/login";
+
+export const USER_URLS = {
+    userLogin: userLoginURL,
 }

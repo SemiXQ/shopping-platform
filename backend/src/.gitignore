@@ -1,3 +1,5 @@
 # flask cache
 __pycache__/
 *.pyc
+
+env/*.env.py

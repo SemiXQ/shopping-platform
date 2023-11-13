@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class LoginComponent {
   userLoginForm: FormGroup;
-  constructor() {
+  isSubmit: boolean = false;
+  readonly homePageUrl = "";
+  constructor(private userService: UserService, private router: Router) {
     this.userLoginForm = new FormGroup({
       email: new FormControl<string>('', [
         Validators.required,
@@ -32,7 +36,13 @@ export class LoginComponent {
     return this.userLoginForm.get("password");
   }
   
-  onSubmit() {
-    console.log(this.userLoginForm.value);
+  submit() {
+    this.isSubmit = true;
+    this.userService.login({
+      email: this.emailControl?.value,
+      pwd: this.pwdControl?.value
+    }).subscribe(() => {
+      this.router.navigateByUrl(this.homePageUrl);
+    });
   }
 }

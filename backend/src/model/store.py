@@ -21,11 +21,11 @@ class Store:
         self.id: str = store_json.get('id', None)
         if not self.id:
             raise Exception("Missing id in store")
-        self.name: str = store_json.get('name', None)
+        self.name: str = store_json.get('name', "")
         self.lonLatLoc: list[float] = store_json.get('lonLatLoc', [])
-        self.address: str = store_json.get('address', None)
-        self.postalCode: str = store_json.get('postalCode', None)
-        self.phone: str = store_json.get('phone', None)
+        self.address: str = store_json.get('address', "")
+        self.postalCode: str = store_json.get('postalCode', "")
+        self.phone: str = store_json.get('phone', "")
         self.openTime: list[OpenTime] = store_json.get('openTime', [])
         if not self.isValid:
             raise Exception("Missing required data in store")

@@ -16,7 +16,7 @@ def cachedGetAll() -> (dict[str, Good], List[dict]):
         app_root = current_app.config["ROOT_PATH"]
         temp_data_path = os.path.join(app_root, 'test_data/goods.json')
         with open(temp_data_path, "r") as f:
-            print("read file")
+            print("read file - goods")
             good_data = json.load(f)['goods']
             for good_json in good_data:
                 good = Good(good_json)

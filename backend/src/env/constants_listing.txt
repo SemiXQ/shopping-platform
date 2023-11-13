@@ -1,0 +1,5 @@
+# TO run this project, please provide data of the following configs
+# in ./constants.py
+
+# used for jwt
+SECRET_KEY: str=
