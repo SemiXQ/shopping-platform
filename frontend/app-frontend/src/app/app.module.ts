@@ -18,6 +18,8 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
 import { MapComponent } from './components/shared/map/map.component';
 import { StoreLocationComponent } from './components/pages/store-location/store-location.component';
 import { MapTooltipComponent } from './components/shared/map/map-tooltip/map-tooltip.component';
+import { TrendsComponent } from './components/pages/trends/trends.component';
+import { ChartComponent } from './components/shared/charts/chart/chart.component';
 
 
 
@@ -31,7 +33,9 @@ import { MapTooltipComponent } from './components/shared/map/map-tooltip/map-too
     LoadingComponent,
     MapComponent,
     StoreLocationComponent,
-    MapTooltipComponent
+    MapTooltipComponent,
+    TrendsComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,9 @@
             <!-- TODO: add ng template if user have an admin accessibility -->
             <ul class="header-container">
                 <li class="header-item">
+                    <a routerLink="/trends">Trends</a>
+                </li>
+                <li class="header-item">
                     <a routerLink="/store-location">Stores</a>
                 </li>
                 <li class="header-item" *ngIf="!user?.token; else userProfile">
