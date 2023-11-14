@@ -42,6 +42,12 @@ export class UserService {
     );
   }
 
+  logout() {
+    this._userSubject.next(new User());
+    this.sessionStorage.clear(UserService.USER_KEY);
+    window.location.reload();
+  }
+
   getUserObservable(): Observable<User> {
     return this._userObservable;
   }
