@@ -1,0 +1,7 @@
+//Please add constants.ts to make project work
+//Contents includes:
+
+// The secrect key here is used to encrypt plaintext sending in request
+// which is not related to auth
+// Please use the same one for back-end to decrypt in env file
+export const SECRECT_KEY = "{You_Key_Value}";
