@@ -9,7 +9,7 @@
                 <li class="header-item">
                     <a routerLink="/store-location">Stores</a>
                 </li>
-                <li class="header-item">
+                <li class="header-item" *ngIf="!user?.token; else userProfile">
                     <a routerLink="/login">Login</a>
                 </li>
                 <li class="header-item">
@@ -19,3 +19,14 @@
         </nav>
     </div>
 </header>
+
+<ng-template #userProfile>
+    <li class="header-item user-profile-container">
+        <a class="user-name">{{user.name}}</a>
+        <div class="user-profile-menu">
+            <a> Profile </a>
+            <a> Orders </a>
+            <a> Logout </a>
+        </div>
+    </li>
+</ng-template>

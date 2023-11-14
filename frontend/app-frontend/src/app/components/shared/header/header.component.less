@@ -24,3 +24,38 @@ header {
     padding: 0 2rem;
 }
 
+.user-profile-container {
+    position: relative;
+    margin-bottom: 5px;
+    &:hover {
+        & > .user-profile-menu {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+.user-profile-menu {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    background-color: #495057;
+    opacity: 1;
+    padding-top: 5px;
+    border: 2px solid white;
+    a {
+        width: 100%;
+        min-width: 7rem;
+        margin: 5px 0 5px 0;
+        padding-top: 5px;
+        text-indent: 15px;
+        border-top: 2px solid white;
+        &:first-child{
+            padding-top: 5px;
+            border-top: none;
+        }
+        &:last-child {
+            margin-bottom: 10px;
+        }
+    }
+}

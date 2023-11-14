@@ -42,6 +42,10 @@ export class UserService {
     );
   }
 
+  getUserObservable(): Observable<User> {
+    return this._userObservable;
+  }
+
   private _getUserFromSessionStorage(): User {
     const userJson = this.sessionStorage.retrieve(UserService.USER_KEY);
     if (userJson === undefined || userJson === null) {
