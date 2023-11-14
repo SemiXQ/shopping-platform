@@ -3,3 +3,7 @@
 
 # used for jwt
 SECRET_KEY: str=
+
+# used for decrypt data in request (not related to auth)
+# to avoid sending plaintext
+DECRYPT_KEY=
