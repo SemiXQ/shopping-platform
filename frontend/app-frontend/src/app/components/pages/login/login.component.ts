@@ -40,7 +40,7 @@ export class LoginComponent {
     this.isSubmit = true;
     this.userService.login({
       email: this.emailControl?.value,
-      pwd: this.pwdControl?.value
+      pwd: this.userService.encrytPwd(this.pwdControl?.value)
     }).subscribe(() => {
       this.router.navigateByUrl(this.homePageUrl);
     });

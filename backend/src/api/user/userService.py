@@ -5,6 +5,11 @@ import json
 from typing import Final, List, Optional
 import os
 from werkzeug.security import check_password_hash
+import bcrypt
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+from src.env.constants import DECRYPT_KEY
+from base64 import b64decode
 
 # TODO: add api to check session expiration
 
@@ -73,6 +78,14 @@ def authVerify(email: str, pwd: str) -> bool:
         else:
             return True
 
+def decrypt_encryptedData(encrypted_data: str) -> str:
+    encrypted_data = b64decode(encrypted_data)
+    cipher = AES.new(DECRYPT_KEY, AES.MODE_CBC, encrypted_data)
+    decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size)
+    print(decrypted_data)
+    return decrypted_data.decode('utf-8')
+
+
 # login
 @users_bp.route('/login', methods=['POST'])
 def login():
@@ -81,7 +94,8 @@ def login():
         return abort(Response("DB issue: file not found", status=404))
     data = request.get_json()
     email = data.get("email")
-    pwd = data.get("pwd")
+    encrytedPwd = data.get("pwd")
+    pwd = decrypt_encryptedData(encrytedPwd)
     if not email or not pwd:
         return abort(Response("Could not verify - data missing", status=401))
     if not authVerify(email, pwd):
