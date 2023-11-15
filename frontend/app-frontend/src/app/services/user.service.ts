@@ -4,7 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../data/models/user';
-import { LocalStorageService } from 'ngx-webstorage';
+//import { LocalStorageService } from 'ngx-webstorage';
+import { SessionStorageService } from 'ngx-webstorage';
 import { USER_URLS } from '../routes/route';
 import { tap } from 'rxjs';
 
@@ -20,7 +21,7 @@ export class UserService {
 
   constructor(private http: HttpClient, 
               private toastService: ToastrService,
-              private sessionStorage: LocalStorageService) { 
+              private sessionStorage: SessionStorageService) { 
     this._userObservable = this._userSubject.asObservable();
   }
 
