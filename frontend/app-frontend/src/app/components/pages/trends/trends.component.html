@@ -1,2 +1,12 @@
 <p>trends works!</p>
-<app-chart></app-chart>
+<div class="trend-body" *ngIf="(chartConfigs$ | async) as ChartConfigs">
+    <div class="trend-container" *ngIf="ChartConfigs?.length !== 0; else loading">
+        <div class="chart-container" *ngFor="let chartConfig of ChartConfigs">
+            <app-chart [chartConfigs]="chartConfig"></app-chart>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

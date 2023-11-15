@@ -22,6 +22,7 @@
     "@clr/angular": "^16.0.3",
     "@clr/ui": "^16.0.3",
     "bootstrap-icons": "^1.11.1",
+    "chart.js": "^4.4.0",
     "ngx-toastr": "^17.0.2",
     "ngx-webstorage": "^12.0.0",
     "ol": "^8.1.0",

@@ -1,5 +1,5 @@
 <h2>Welcome to Shop-H! Explore here to get your trending clothing!</h2>
-<ul class="goods">
+<ul class="goods" *ngIf="goods.length !== 0; else loading">
     <li class="goods-item" *ngFor="let good of goods">
         <a class="good-router" routerLink="good/{{good.id}}">
             <img [src]="good.imageUrl" [alt]="good.name">
@@ -20,3 +20,7 @@
         </a>
     </li>
 </ul>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
