@@ -7,6 +7,7 @@ import { ClarityModule } from '@clr/angular';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { StoreModule } from '@ngrx/store';
 
 
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { StoreLocationComponent } from './components/pages/store-location/store-
 import { MapTooltipComponent } from './components/shared/map/map-tooltip/map-tooltip.component';
 import { TrendsComponent } from './components/pages/trends/trends.component';
 import { ChartComponent } from './components/shared/charts/chart/chart.component';
+import { CartComponent } from './components/pages/cart/cart.component';
 
 
 
@@ -35,7 +37,8 @@ import { ChartComponent } from './components/shared/charts/chart/chart.component
     StoreLocationComponent,
     MapTooltipComponent,
     TrendsComponent,
-    ChartComponent
+    ChartComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { ChartComponent } from './components/shared/charts/chart/chart.component
       positionClass: 'toast-bottom-right',
       newestOnTop: false,
     }),
+    StoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
