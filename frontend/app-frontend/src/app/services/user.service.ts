@@ -19,10 +19,14 @@ export class UserService {
   private _userObservable: Observable<User>;
   private _userSubject = new BehaviorSubject<User>(this._getUserFromSessionStorage());
 
+  private _userLogoutObservable: Observable<boolean>;
+  private _userLogoutSubject = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient, 
               private toastService: ToastrService,
               private sessionStorage: SessionStorageService) { 
     this._userObservable = this._userSubject.asObservable();
+    this._userLogoutObservable = this._userLogoutSubject.asObservable();
   }
 
   login(loginInfo: UserLogin): Observable<User> {
@@ -45,12 +49,17 @@ export class UserService {
 
   logout() {
     this._userSubject.next(new User());
+    this._userLogoutSubject.next(true);
     this.sessionStorage.clear(UserService.USER_KEY);
     window.location.reload();
   }
 
   getUserObservable(): Observable<User> {
     return this._userObservable;
+  }
+
+  getUserLogoutObservable(): Observable<boolean> {
+    return this._userLogoutObservable;
   }
 
   private _getUserFromSessionStorage(): User {

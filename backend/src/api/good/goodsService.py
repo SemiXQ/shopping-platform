@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, jsonify
+from flask import Blueprint, current_app, jsonify, request
 from src.model.good import Good
 from src.cache import cache
 import json
@@ -46,3 +46,19 @@ def getById(id:str):
         return jsonify({"good": target}), 200
     else:
         return jsonify({"error": "Good not found"}), 404
+
+# get goods by ids
+@goods_bp.route('/good_list', methods=['GET'])
+def getByIds():
+    goods, _ = cachedGetAll()
+    data = request.get_json()
+    ids = request.get("ids")
+    if not ids:
+        return jsonify({"error": "Data not found"}), 404
+    else:
+        goods_dict = []
+        for id in ids:
+            good = goods.get(id, None)
+            if good and isinstance(good, Good):
+                goods_dict.append(good.toDict)
+        return jsonify({"goods": goods_dict}), 200

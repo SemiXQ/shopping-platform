@@ -10,3 +10,7 @@ export interface GoodItem {
     good?: Good,
     error?: string
 }
+
+export interface GoodIds {
+    ids?: string[]
+}

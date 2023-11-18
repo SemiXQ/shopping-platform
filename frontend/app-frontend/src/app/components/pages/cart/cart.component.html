@@ -1,1 +1,30 @@
-<p>cart works!</p>
+<div>
+    <h1>Shopping Cart</h1>
+    <div class="cart-container" *ngIf="!noUser(); else NoUser">
+        <div *ngIf="nonEmptyCart(); else EmptyCart" class="cart-item-container">
+            <div *ngFor="let good of cart?.good_detail">
+                <a routerLink="../good/{{good.good_id}}">
+                    <img [src]="good.good_imgUrl" [alt]="good.good_name">
+                </a>
+                <div>
+                    <p>{{good.good_name}}</p>
+                    <div>
+                        Current Amount:
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #EmptyCart>
+    <div class="cart-item-container">
+        Nothing in your cart.
+    </div>
+</ng-template>
+
+<ng-template #NoUser>
+    <div class="cart-container">
+        Please Log into your account first.
+    </div>
+</ng-template>
