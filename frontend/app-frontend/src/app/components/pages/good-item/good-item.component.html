@@ -5,17 +5,19 @@
             <h1>
                 <a>{{good.type}}</a>  >  {{good.name}}
             </h1>
-            <div>
+            <div class="kudos-container">
                 <img [src]="'assets/heart-svgrepo.svg'" [alt]="'heart-icon'">
-                <p>{{good.favors}}</p>
+                <p>Kudos: {{good.favors}}</p>
             </div>
             <div>
-                <p [ngStyle]="{'color': good.on_sale? 'goldenrod':'whitesmoke'}"> {{good.current_price | currency}}</p>
-                <del *ngIf="good.on_sale" style="color:orangered">{{good.pre_price | currency}}</del>
+                <p [ngStyle]="{'color': good.on_sale? 'goldenrod':'whitesmoke'}">Price: {{good.current_price | currency}}</p>
+                <p *ngIf="good.on_sale" style="color:orangered">Previous Price: <del >{{good.pre_price | currency}}</del></p>
             </div>
             <div class="shopping">
-                <label for="good-quantity" >Quantity: </label>
-                <input id="good-quantity" [formControl]="quantityControl" type="number" min="1" max="5" >
+                <div>
+                    <label for="good-quantity" >Quantity: </label>
+                    <input id="good-quantity" [formControl]="quantityControl" type="number" min="1" max="5" >
+                </div>
                 <button (click)="addToCart()">Add to Cart</button>
             </div>
         </div>

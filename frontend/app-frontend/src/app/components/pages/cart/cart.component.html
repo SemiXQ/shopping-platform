@@ -2,19 +2,21 @@
     <h1>Shopping Cart</h1>
     <div class="cart-container" *ngIf="!noUser(); else NoUser">
         <div *ngIf="nonEmptyCart(); else EmptyCart" class="cart-item-container">
-            <div *ngFor="let good of cart?.good_detail">
+            <div *ngFor="let good of cart?.good_detail" class="cart-item">
                 <a routerLink="../good/{{good.good_id}}">
                     <img [src]="good.good_imgUrl" [alt]="good.good_name">
                 </a>
-                <div>
-                    <p>{{good.good_name}}</p>
-                    <div>
+                <div class="good-details">
+                    <p>Product: <span>{{good.good_name}}</span></p>
+                    <p>Price: <span>{{good.good_price | currency}}</span> each</p>
+                    <p>
                         <!-- TODO:change to editable -->
-                        Current Amount: {{good.good_count}}
-                    </div>
+                        Current Amount: <span>{{good.good_count}}</span>
+                    </p>
                     <button (click)="remove(good.good_id)"> Remove </button>
                 </div>
             </div>
+            <button id="order-btn"> Place Order </button>
         </div>
     </div>
 </div>

@@ -1,9 +1,10 @@
 .good-container {
     display: flex;
-    margin: auto;
     flex-grow: 1;
-    margin-top: 10%;
+    margin: 5% 5% 5% 5%;
     justify-content: space-evenly;
+    background: #495057;
+    padding: 5% 0 5% 0;
     & > img {
         margin-left: 10%;
         object-fit: cover;
@@ -13,13 +14,27 @@
 }
 
 .good-info {
-    margin-left: 10%;
+    margin: 0 10% 5% 10%;
     display: flex;
     flex: 1 0 auto;
     flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.6vw;
+    .shopping {
+        padding-top: 5%;
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: space-evenly;
+        min-height: 6%;
+        button {
+            margin-top: 5%;
+            max-width: 80%;
+        }
+    }
 }
 
 .good-info img {
     width: 40px;
-    height: 40px;
+    height: 40px
 }
