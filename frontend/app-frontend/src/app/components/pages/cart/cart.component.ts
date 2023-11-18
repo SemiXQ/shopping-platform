@@ -12,8 +12,8 @@ export class CartComponent {
   cart!: DetailedCart;
   
 
-  constructor(private cartService: CartService) {
-    this.cartService.getCart$().subscribe((cart: DetailedCart) => {
+  constructor(private _cartService: CartService) {
+    this._cartService.getCart$().subscribe((cart: DetailedCart) => {
       this.cart = cart;
     })
   }
@@ -24,6 +24,12 @@ export class CartComponent {
 
   nonEmptyCart(): boolean {
     return (this.cart?.good_detail !== undefined) && (this.cart?.good_detail?.length !== 0);
+  }
+
+  remove(good_id: string) {
+    this.cart.goods_info = this.cart.goods_info.filter(good_info => good_info.good_id !== good_id);
+    this.cart.good_detail = this.cart.good_detail.filter(good_detail => good_detail.good_id !== good_id);
+    this._cartService.updateCartInSession(this.cart);
   }
 
   private _updateGoodList() {

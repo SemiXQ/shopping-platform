@@ -9,8 +9,10 @@
                 <div>
                     <p>{{good.good_name}}</p>
                     <div>
-                        Current Amount:
+                        <!-- TODO:change to editable -->
+                        Current Amount: {{good.good_count}}
                     </div>
+                    <button (click)="remove(good.good_id)"> Remove </button>
                 </div>
             </div>
         </div>

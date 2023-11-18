@@ -24,3 +24,10 @@ const userLoginURL: string = userURL + "/login";
 export const USER_URLS = {
     userLogin: userLoginURL,
 }
+
+const cartURL: string = API_URL + "/cart";
+const getOrUpdateCartById: (id:string) => string = (id:string) => cartURL + `/${id}`;
+
+export const CART_URLS = {
+    getOrUpdateCartById: getOrUpdateCartById,
+}
