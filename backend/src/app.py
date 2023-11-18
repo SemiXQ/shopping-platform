@@ -5,6 +5,7 @@ from src.cache import cache
 from src.api.good import goodsService
 from src.api.store import storesService
 from src.api.user import userService
+from src.api.cart import cartService
 from typing import Final
 from src.env.constants import SECRET_KEY
 
@@ -30,3 +31,4 @@ cache.init_app(app)
 app.register_blueprint(goodsService.goods_bp, url_prefix='/goods')
 app.register_blueprint(storesService.stores_bp, url_prefix='/stores')
 app.register_blueprint(userService.users_bp, url_prefix='/user')
+app.register_blueprint(cartService.carts_bp, url_prefix='/cart')

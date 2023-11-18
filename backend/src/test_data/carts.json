@@ -1,0 +1,31 @@
+{
+    "carts": [
+        {
+            "user_id": "1",
+            "goods_info": [
+                {
+                    "good_id": "2",
+                    "good_count": 5
+                },
+                {
+                    "good_id": "3",
+                    "good_count": 2
+                },
+                {
+                    "good_id": "5",
+                    "good_count": 1
+                }
+            ],
+            "price_amount": 0,
+            "isDirty": false,
+            "timeStamp": 1700313957
+        },
+        {
+            "user_id": "2",
+            "goods_info": [],
+            "price_amount": 0,
+            "isDirty": false,
+            "timeStamp": 0
+        }
+    ]
+}
