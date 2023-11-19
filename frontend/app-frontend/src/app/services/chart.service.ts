@@ -2,14 +2,7 @@ import { Injectable } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartOptions, Plugin } from 'chart.js';
 import { Observable, of } from 'rxjs';
 import { trendData } from 'src/test_data/charts-data';
-
-export enum ChartType {
-  Bar = "bar",
-  Line = "line",
-  Scatter = "scatter",
-  Donut = "doughnut",
-  Pie = "pie"
-}
+import { ChartDataWithName, ChartType } from '../data/interfaces/chartInterfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +14,8 @@ export class ChartService {
   constructor() { }
 
   //TODO: change to REST api
-  fetchDataByNames(names: string[]): Observable<ChartData[]> {
-    const chartDatas: ChartData[] = [];
+  fetchDataByNames(names: string[]): Observable<ChartDataWithName[]> {
+    const chartDatas: ChartDataWithName[] = [];
     for(let name of names) {
       chartDatas.push(this._temp_data[name]);
     }

@@ -9,40 +9,13 @@ Chart.register(...registerables);
   styleUrls: ['./chart.component.less']
 })
 export class ChartComponent implements OnInit {
-  @Input({required: true}) chartConfigs!: ChartConfiguration;
+  @Input({ required: true }) chartName!: string;
+  @Input({ required: true }) chartConfigs!: ChartConfiguration;
 
 
   chart!: Chart;
-  // change to input
-  // chartConfigs: ChartConfiguration;
 
-  constructor() {
-    // this.chartConfigs = {
-    //   type: 'bar', //this denotes tha type of chart
-
-    //   data: {// values on X-Axis
-    //     labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-		// 						 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
-	  //      datasets: [
-    //       {
-    //         label: "Sales",
-    //         data: [467,576, 572, 79, 92,
-		// 						 574, 573, 576],
-    //         backgroundColor: 'blue'
-    //       },
-    //       {
-    //         label: "Profit",
-    //         data: [542, 542, 536, 327, 17,
-		// 							 0.00, 538, 541],
-    //         backgroundColor: 'limegreen'
-    //       }  
-    //     ]
-    //   },
-    //   options: {
-    //     aspectRatio:2.5
-    //   }
-    // };
-  }
+  constructor() { }
 
   ngOnInit(): void {
       this.createChart();

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ChartService, ChartType } from 'src/app/services/chart.service';
+import { ChartService } from 'src/app/services/chart.service';
 import { ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ChartConfigWithName, ChartDataWithName, ChartType } from 'src/app/data/interfaces/chartInterfaces';
 
 @Component({
   selector: 'app-trends',
@@ -15,21 +16,23 @@ export class TrendsComponent {
   // TODO: customized for each table
   private readonly _options: ChartOptions  = { aspectRatio:2.5 };
 
-  chartConfigSubject: BehaviorSubject<ChartConfiguration[]> = new BehaviorSubject<ChartConfiguration[]>([]);
-  chartConfigs$: Observable<ChartConfiguration[]>;
+  chartConfigsWithNameSubject: BehaviorSubject<ChartConfigWithName[]> = new BehaviorSubject<ChartConfigWithName[]>([]);
+  chartConfigsWithName$: Observable<ChartConfigWithName[]>;
   constructor(private _chartService: ChartService) {
-    this.chartConfigs$ = this.chartConfigSubject.asObservable();
+    this.chartConfigsWithName$ = this.chartConfigsWithNameSubject.asObservable();
     this._chartService.fetchDataByNames(this.chartDataNames).subscribe(
-      (chartDatas: ChartData[]) => {
-        const chartConfigs: ChartConfiguration[] = [];
+      (chartDatas: ChartDataWithName[]) => {
+        const chartConfigs: ChartConfigWithName[] = [];
         chartDatas.forEach(data => {
-          chartConfigs.push(this._chartService.generateChartConfigs(
-            ChartType.Bar,
-            data,
-            this._options
-          ));
+          chartConfigs.push({
+            name: data.name,
+            config: this._chartService.generateChartConfigs(
+              ChartType.Bar,
+              data.chartData,
+              this._options
+          )});
         });
-        this.chartConfigSubject.next(chartConfigs);
+        this.chartConfigsWithNameSubject.next(chartConfigs);
     })
   }
 }

@@ -1,8 +1,10 @@
 <h1>Explore the Latest Fasion Trend!</h1>
-<div class="trend-body" *ngIf="(chartConfigs$ | async) as ChartConfigs">
+<div class="trend-body" *ngIf="(chartConfigsWithName$ | async) as ChartConfigs">
     <div class="trend-container" *ngIf="ChartConfigs?.length !== 0; else loading">
-        <div class="chart-container" *ngFor="let chartConfig of ChartConfigs">
-            <app-chart [chartConfigs]="chartConfig"></app-chart>
+        <div class="chart-container" *ngFor="let chartConfigwithName of ChartConfigs">
+            <app-chart  [chartName]="chartConfigwithName.name"
+                        [chartConfigs]="chartConfigwithName.config">
+            </app-chart>
         </div>
     </div>
 </div>
