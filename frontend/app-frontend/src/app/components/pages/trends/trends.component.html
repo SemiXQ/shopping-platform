@@ -1,4 +1,4 @@
-<p>trends works!</p>
+<h1>Explore the Latest Fasion Trend!</h1>
 <div class="trend-body" *ngIf="(chartConfigs$ | async) as ChartConfigs">
     <div class="trend-container" *ngIf="ChartConfigs?.length !== 0; else loading">
         <div class="chart-container" *ngFor="let chartConfig of ChartConfigs">
