@@ -4,6 +4,7 @@ from src.cache import cache
 import json
 from typing import Final, List, Optional
 import os
+from src.entity import database
 
 goods_bp = Blueprint('goods_bp', __name__)
 
@@ -13,15 +14,22 @@ def cachedGetAll() -> (dict[str, Good], List[dict]):
     goods: dict[str, Good] = {}
     goods_dict: List[dict] = []
     try:
-        app_root = current_app.config["ROOT_PATH"]
-        temp_data_path = os.path.join(app_root, 'test_data/goods.json')
-        with open(temp_data_path, "r") as f:
-            print("read file - goods")
-            good_data = json.load(f)['goods']
-            for good_json in good_data:
-                good = Good(good_json)
-                goods[good.id] = good
-                goods_dict.append(good.toDict())
+        data_mode = current_app.config["DATA_FROM"]
+        good_data = None
+        if data_mode == "db":
+            good_data = database.getAll(database.Tables.GOOD)
+            print("Goods data fetched successfully")
+        else:
+            app_root = current_app.config["ROOT_PATH"]
+            temp_data_path = os.path.join(app_root, 'test_data/goods.json')
+            with open(temp_data_path, "r") as f:
+                print("read file - goods")
+                good_data = json.load(f)
+
+        for good_json in good_data:
+            good = Good(good_json)
+            goods[good.id] = good
+            goods_dict.append(good.toDict())
     except FileNotFoundError:
         print("Goods Json not found")
     return goods, goods_dict

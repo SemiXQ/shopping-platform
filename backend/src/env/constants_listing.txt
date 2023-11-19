@@ -7,3 +7,16 @@ SECRET_KEY: str=
 # used for decrypt data in request (not related to auth)
 # to avoid sending plaintext
 DECRYPT_KEY=
+
+# DB: mongodb
+# database user name
+DB_USER_NAME=
+
+# database password
+DB_PASSWORD=
+
+# database uri
+DB_URI="mongodb+srv://{0}:{1}@cluster0.g0tycju.mongodb.net/?retryWrites=true&w=majority".format(DB_USER_NAME, DB_PASSWORD)
+
+# use local data or db
+DATA_FROM="db"   # "local" for loading local json data, "db" for fetching data from db

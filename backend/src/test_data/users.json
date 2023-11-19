@@ -1,26 +1,24 @@
-{
-    "users": [
-        {
-            "_dev comments": "test user 1, password hashed from '12345kJ@'",
-            "_dev todo comments": "TODO: hash user email and name",
-            "id": "1",
-            "email": "Monkey@gmail.com",
-            "hashed_pwd": "pbkdf2:sha256:260000$8ZjavmKOUUVdN6Q0$dd22a086c75626e32fef20456b91976aa45425aa6172ec65d187ea442cae62ec",
-            "name": "Monkey D Luffy",
-            "default_address": "Foosha Village, East Blue",
-            "address": ["Foosha Village, East Blue"],
-            "isAdmin": "false"
-        },
-        {
-            "_dev comments": "test user 2, password hashed from 'abcdef1Q#'",
-            "_dev todo comments": "TODO: hash user email and name",
-            "id": "2",
-            "email": "Nami@coco.ca",
-            "hashed_pwd": "pbkdf2:sha256:260000$RGFQHLmqxlhbehtE$f4e6859bae55983e808a92a29dbc48d8eac3f7a8b19da333a73798b7975e90d9",
-            "name": "Nami",
-            "default_address": "Coco Village, East Blue",
-            "address": ["Coco Village, East Blue"],
-            "isAdmin": "true"
-        }
-    ]
-}
+[
+    {
+        "_dev comments": "test user 1, password hashed from '12345kJ@'",
+        "_dev todo comments": "TODO: hash user email and name",
+        "id": "1",
+        "email": "Monkey@gmail.com",
+        "hashed_pwd": "pbkdf2:sha256:260000$8ZjavmKOUUVdN6Q0$dd22a086c75626e32fef20456b91976aa45425aa6172ec65d187ea442cae62ec",
+        "name": "Monkey D Luffy",
+        "default_address": "Foosha Village, East Blue",
+        "address": ["Foosha Village, East Blue"],
+        "isAdmin": "false"
+    },
+    {
+        "_dev comments": "test user 2, password hashed from 'abcdef1Q#'",
+        "_dev todo comments": "TODO: hash user email and name",
+        "id": "2",
+        "email": "Nami@coco.ca",
+        "hashed_pwd": "pbkdf2:sha256:260000$RGFQHLmqxlhbehtE$f4e6859bae55983e808a92a29dbc48d8eac3f7a8b19da333a73798b7975e90d9",
+        "name": "Nami",
+        "default_address": "Coco Village, East Blue",
+        "address": ["Coco Village, East Blue"],
+        "isAdmin": "true"
+    }
+]

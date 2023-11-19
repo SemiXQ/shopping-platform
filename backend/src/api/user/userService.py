@@ -5,6 +5,7 @@ import json
 from typing import Final, List, Optional
 import os
 from werkzeug.security import check_password_hash
+from src.entity import database
 
 # TODO: add api to check session expiration
 
@@ -17,16 +18,23 @@ def cachedGetAll() -> (dict[str, User], dict[str, dict]):
     users: dict[str, User] = {}
     users_dict: dict[str, dict] = {}
     try:
-        app_root = current_app.config["ROOT_PATH"]
-        temp_data_path = os.path.join(app_root, 'test_data/users.json')
-        with open(temp_data_path, "r") as f:
-            print("read file - users")
-            user_data = json.load(f)['users']
-            for user_json in user_data:
-                user = User(user_json)
-                # both user.id and user.email are unique for a specific user
-                users[user.email] = user
-                users_dict[user.email] = user.toDict()
+        data_mode = current_app.config["DATA_FROM"]
+        user_data = None
+        if data_mode == "db":
+            user_data = database.getAll(database.Tables.USER)
+            print("Users data fetched successfully")
+        else:
+            app_root = current_app.config["ROOT_PATH"]
+            temp_data_path = os.path.join(app_root, 'test_data/users.json')
+            with open(temp_data_path, "r") as f:
+                print("read file - users")
+                user_data = json.load(f)
+
+        for user_json in user_data:
+            user = User(user_json)
+            # both user.id and user.email are unique for a specific user
+            users[user.email] = user
+            users_dict[user.email] = user.toDict()
     except FileNotFoundError:
         print("User Json not found")
     return users, users_dict
@@ -36,17 +44,25 @@ def fetchAuthDataWithEmail(email: str) -> (bool, str):
     hashedpwd = ''
     succeed = False
     try:
-        app_root = current_app.config["ROOT_PATH"]
-        temp_data_path = os.path.join(app_root, 'test_data/users.json')
-        with open(temp_data_path, "r") as f:
-            print("read file - users - fetch Auth")
-            user_data = json.load(f)['users']
-            user_auth = {user['email']: user['hashed_pwd'] for user in user_data}
-            hashedpwd = user_auth.get(email, '')
-            if not hashedpwd:
-                print('Fail to Auth: Issue in DB')
-            else:
-                succeed = True
+        data_mode = current_app.config["DATA_FROM"]
+        hashedpwd = None
+        if data_mode == "db":
+            user_data = database.getOneByAttribute(database.Tables.USER, ("email", email))
+            hashedpwd = user_data.get('hashed_pwd', '')
+            print("user data fetched successfully with email")
+        else:
+            app_root = current_app.config["ROOT_PATH"]
+            temp_data_path = os.path.join(app_root, 'test_data/users.json')
+            with open(temp_data_path, "r") as f:
+                print("read file - users - fetch Auth")
+                user_data = json.load(f)
+                user_auth = {user['email']: user['hashed_pwd'] for user in user_data}
+                hashedpwd = user_auth.get(email, '')
+
+        if not hashedpwd:
+            print('Fail to Auth: Issue in DB')
+        else:
+            succeed = True
     except FileNotFoundError:
         print("User Json not found")
     return (succeed, hashedpwd)

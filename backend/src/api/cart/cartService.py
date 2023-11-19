@@ -5,6 +5,7 @@ import json
 from typing import Final, List, Optional
 import os
 from werkzeug.security import check_password_hash
+from src.entity import database
 
 
 carts_bp = Blueprint('carts_bp', __name__)
@@ -15,16 +16,23 @@ def cachedGetAll() -> (dict[str, Cart], dict[str, dict]):
     carts: dict[str, Cart] = {}
     carts_dict: dict[str, dict] = {}
     try:
-        app_root = current_app.config["ROOT_PATH"]
-        temp_data_path = os.path.join(app_root, 'test_data/carts.json')
-        with open(temp_data_path, "r") as f:
-            print("read file - carts")
-            cart_data = json.load(f)['carts']
-            for cart_json in cart_data:
-                cart = Cart(cart_json)
-                # both cart.id and cart.email are unique for a specific cart
-                carts[cart.user_id] = cart
-                carts_dict[cart.user_id] = cart.toDict()
+        data_mode = current_app.config["DATA_FROM"]
+        cart_data = None
+        if data_mode == "db":
+            cart_data = database.getAll(database.Tables.CART)
+            print("Cart data fetched successfully")
+        else:
+            app_root = current_app.config["ROOT_PATH"]
+            temp_data_path = os.path.join(app_root, 'test_data/carts.json')
+            with open(temp_data_path, "r") as f:
+                print("read file - carts")
+                cart_data = json.load(f)
+        
+        for cart_json in cart_data:
+            cart = Cart(cart_json)
+            # both cart.id and cart.email are unique for a specific cart
+            carts[cart.user_id] = cart
+            carts_dict[cart.user_id] = cart.toDict()
     except FileNotFoundError:
         print("cart Json not found")
     return carts, carts_dict

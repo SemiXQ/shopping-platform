@@ -7,7 +7,7 @@ from src.api.store import storesService
 from src.api.user import userService
 from src.api.cart import cartService
 from typing import Final
-from src.env.constants import SECRET_KEY
+from src.env.constants import SECRET_KEY, DB_URI, DATA_FROM
 
 # creating the flask app
 app = Flask(__name__)
@@ -20,6 +20,8 @@ config = {
     "CACHE_TYPE": "SimpleCache",
     "CACHE_DEFAULT_TIMEOUT": 100,
     "SECRET_KEY": "U2VjcmV0IGtleSBTSE9QSA==",
+    "MONGO_URI": DB_URI,
+    "DATA_FROM": DATA_FROM,
     "ROOT_PATH": app_root
 }
 
