@@ -1,4 +1,6 @@
-<div class="chart-container">
+<div class="chart-container" *ngIf="this.chartId">
     <div class="chart-name"> {{chartName}} </div>
-    <canvas id="my-chart"></canvas>
+    <div class="chartBox">
+        <canvas id={{this.chartId}}></canvas>
+    </div>
 </div>

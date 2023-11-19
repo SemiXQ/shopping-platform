@@ -10,7 +10,8 @@ export enum ChartType {
 
 export interface ChartConfigWithName {
     name: string,
-    config: ChartConfiguration
+    config: ChartConfiguration,
+    chartId: string
 }  
 
 export interface ChartDataWithName {

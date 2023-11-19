@@ -3,6 +3,7 @@
     <div class="trend-container" *ngIf="ChartConfigs?.length !== 0; else loading">
         <div class="chart-container" *ngFor="let chartConfigwithName of ChartConfigs">
             <app-chart  [chartName]="chartConfigwithName.name"
+                        [chartId]="chartConfigwithName.chartId"
                         [chartConfigs]="chartConfigwithName.config">
             </app-chart>
         </div>

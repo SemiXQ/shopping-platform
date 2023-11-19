@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -8,8 +8,9 @@ Chart.register(...registerables);
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.less']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, AfterViewInit {
   @Input({ required: true }) chartName!: string;
+  @Input({ required: true }) chartId!: string;
   @Input({ required: true }) chartConfigs!: ChartConfiguration;
 
 
@@ -18,10 +19,16 @@ export class ChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-      this.createChart();
+      //this.createChart();
+  }
+
+  ngAfterViewInit(): void {
+      if(this.chartId !== undefined) {
+        this.createChart();
+      }
   }
 
   createChart() {
-    this.chart = new Chart("my-chart", this.chartConfigs);
+    this.chart = new Chart(this.chartId, this.chartConfigs);
   }
 }

@@ -11,10 +11,14 @@ import { ChartConfigWithName, ChartDataWithName, ChartType } from 'src/app/data/
 })
 export class TrendsComponent {
   // TODO: change to user input
-  private readonly chartDataNames = ['bottom'];
+  private readonly chartDataNames = ['bottom', 'bottom_total', 'jacket'];
 
   // TODO: customized for each table
-  private readonly _options: ChartOptions  = { aspectRatio:2.5 };
+  //private readonly _options: ChartOptions  = { aspectRatio:2.5 };
+  private readonly _options: ChartOptions  = { maintainAspectRatio: false };
+
+  chartTypes: ChartType[] = [ChartType.Bar, ChartType.Donut, ChartType.Line];
+  chartIDs: string[] = ['my-bar-chart', 'my-donut-chart', 'my-line-chart'];
 
   chartConfigsWithNameSubject: BehaviorSubject<ChartConfigWithName[]> = new BehaviorSubject<ChartConfigWithName[]>([]);
   chartConfigsWithName$: Observable<ChartConfigWithName[]>;
@@ -23,13 +27,25 @@ export class TrendsComponent {
     this._chartService.fetchDataByNames(this.chartDataNames).subscribe(
       (chartDatas: ChartDataWithName[]) => {
         const chartConfigs: ChartConfigWithName[] = [];
-        chartDatas.forEach(data => {
+        chartDatas.forEach((data, idx) => {
+          const options = {...this._options};
+          if (this.chartTypes[idx] === ChartType.Donut) {
+            options.scales = {
+              x: {
+                display: false
+              },
+              y: {
+                display: false
+              }
+            }
+          }
           chartConfigs.push({
             name: data.name,
+            chartId: this.chartIDs[idx],
             config: this._chartService.generateChartConfigs(
-              ChartType.Bar,
+              this.chartTypes[idx],
               data.chartData,
-              this._options
+              options
           )});
         });
         this.chartConfigsWithNameSubject.next(chartConfigs);
